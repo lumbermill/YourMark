@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CameraManager.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <CameraManagerDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (strong, nonatomic) id detailItem;
+@property NSString *name;
+@property (nonatomic) NSString *classifier;
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end

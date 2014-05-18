@@ -10,26 +10,47 @@
 
 #import "DetailViewController.h"
 
-@interface MasterViewController () {
-    NSMutableArray *_objects;
-}
+#define BASE_URL @"http://dev.lumber-mill.co.jp/sandbox/opencv/cascade_classifiers.php"
+
+@interface MasterViewController ()
 @end
 
-@implementation MasterViewController
+@implementation MasterViewController{
+    NSArray *data;
+}
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
 }
 
+- (void) refresh
+{
+    data = [NSArray array];
+
+    // JSONを受け取る
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Connecting" message:@"Fetching menu..." delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
+    // 失敗したら？
+    
+    NSURL *url = [NSURL URLWithString:BASE_URL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *d, NSError *error) {
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
+        
+        data = [json objectForKey:@"data"];
+        
+        [av dismissWithClickedButtonIndex:0 animated:YES];
+        [self.tableView reloadData];
+    }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    
+    [self refresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,15 +59,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
 
 #pragma mark - Table View
 
@@ -57,57 +69,59 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    NSArray *d = data[indexPath.row];
+    // 0:filename 1:title 2:timestamp
+    
+    cell.textLabel.text = d[1];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",d[0],d[2]];
+    if (d[3]) {
+        // this id has an image.
+        NSString *png = [d[0] stringByReplacingOccurrencesOfString:@".xml" withString:@".png"];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?name=%@",BASE_URL,png]];
+
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        cell.imageView.image = [UIImage imageWithData:imageData];
+    }
+    
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return @"";
 }
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-}
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+        NSString *xml = data[indexPath.row][0];
+        NSString *name = data[indexPath.row][1];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?name=%@",BASE_URL,xml]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [[segue destinationViewController] setClassifier:nil];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *d, NSError *error) {
+            NSString *dir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+            NSString *path = [NSString stringWithFormat:@"%@/%@",dir,xml];
+            [d writeToFile:path atomically:YES];
+            [[segue destinationViewController] setClassifier:path];
+            [[segue destinationViewController] setName:name];
+            NSLog(@"classifier=%@",path);
+        }];
     }
 }
+
+- (IBAction) refreshPushed:(id)sender
+{
+    [self refresh];
+}
+
 
 @end

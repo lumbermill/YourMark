@@ -10,4 +10,6 @@
 
 @interface MasterViewController : UITableViewController
 
+- (IBAction) refreshPushed:(id)sender;
+
 @end

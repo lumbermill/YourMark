@@ -15,13 +15,16 @@
 		13098990190F7D46003E3518 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1309898F190F7D46003E3518 /* AppDelegate.m */; };
 		13098993190F7D46003E3518 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13098991190F7D46003E3518 /* Main.storyboard */; };
 		13098996190F7D46003E3518 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13098995190F7D46003E3518 /* MasterViewController.m */; };
-		13098999190F7D46003E3518 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13098998190F7D46003E3518 /* DetailViewController.m */; };
+		13098999190F7D46003E3518 /* DetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13098998190F7D46003E3518 /* DetailViewController.mm */; };
 		1309899B190F7D46003E3518 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1309899A190F7D46003E3518 /* Images.xcassets */; };
 		130989A2190F7D46003E3518 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130989A1190F7D46003E3518 /* XCTest.framework */; };
 		130989A3190F7D46003E3518 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1309897F190F7D46003E3518 /* Foundation.framework */; };
 		130989A4190F7D46003E3518 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13098983190F7D46003E3518 /* UIKit.framework */; };
 		130989AC190F7D46003E3518 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 130989AA190F7D46003E3518 /* InfoPlist.strings */; };
 		130989AE190F7D46003E3518 /* YourMarkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 130989AD190F7D46003E3518 /* YourMarkTests.m */; };
+		130989FC190F8A39003E3518 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 130989FB190F8A39003E3518 /* opencv2.framework */; };
+		130989FF190F8A6B003E3518 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 130989FE190F8A6B003E3518 /* CameraManager.m */; };
+		13098A02190F8AC4003E3518 /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13098A01190F8AC4003E3518 /* UIImage+OpenCV.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,13 +52,18 @@
 		13098994190F7D46003E3518 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		13098995190F7D46003E3518 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		13098997190F7D46003E3518 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		13098998190F7D46003E3518 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		13098998190F7D46003E3518 /* DetailViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DetailViewController.mm; sourceTree = "<group>"; };
 		1309899A190F7D46003E3518 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		130989A0190F7D46003E3518 /* YourMarkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YourMarkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		130989A1190F7D46003E3518 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		130989A9190F7D46003E3518 /* YourMarkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YourMarkTests-Info.plist"; sourceTree = "<group>"; };
 		130989AB190F7D46003E3518 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		130989AD190F7D46003E3518 /* YourMarkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YourMarkTests.m; sourceTree = "<group>"; };
+		130989FB190F8A39003E3518 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		130989FD190F8A6B003E3518 /* CameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraManager.h; sourceTree = "<group>"; };
+		130989FE190F8A6B003E3518 /* CameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraManager.m; sourceTree = "<group>"; };
+		13098A00190F8AC4003E3518 /* UIImage+OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+OpenCV.h"; sourceTree = "<group>"; };
+		13098A01190F8AC4003E3518 /* UIImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+OpenCV.mm"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +73,7 @@
 			files = (
 				13098982190F7D46003E3518 /* CoreGraphics.framework in Frameworks */,
 				13098984190F7D46003E3518 /* UIKit.framework in Frameworks */,
+				130989FC190F8A39003E3518 /* opencv2.framework in Frameworks */,
 				13098980190F7D46003E3518 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +113,7 @@
 		1309897E190F7D46003E3518 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				130989FB190F8A39003E3518 /* opencv2.framework */,
 				1309897F190F7D46003E3518 /* Foundation.framework */,
 				13098981190F7D46003E3518 /* CoreGraphics.framework */,
 				13098983190F7D46003E3518 /* UIKit.framework */,
@@ -120,8 +130,12 @@
 				13098991190F7D46003E3518 /* Main.storyboard */,
 				13098994190F7D46003E3518 /* MasterViewController.h */,
 				13098995190F7D46003E3518 /* MasterViewController.m */,
+				13098A00190F8AC4003E3518 /* UIImage+OpenCV.h */,
+				13098A01190F8AC4003E3518 /* UIImage+OpenCV.mm */,
+				130989FD190F8A6B003E3518 /* CameraManager.h */,
+				130989FE190F8A6B003E3518 /* CameraManager.m */,
 				13098997190F7D46003E3518 /* DetailViewController.h */,
-				13098998190F7D46003E3518 /* DetailViewController.m */,
+				13098998190F7D46003E3518 /* DetailViewController.mm */,
 				1309899A190F7D46003E3518 /* Images.xcassets */,
 				13098986190F7D46003E3518 /* Supporting Files */,
 			);
@@ -257,7 +271,9 @@
 				13098990190F7D46003E3518 /* AppDelegate.m in Sources */,
 				13098996190F7D46003E3518 /* MasterViewController.m in Sources */,
 				1309898C190F7D46003E3518 /* main.m in Sources */,
-				13098999190F7D46003E3518 /* DetailViewController.m in Sources */,
+				13098999190F7D46003E3518 /* DetailViewController.mm in Sources */,
+				13098A02190F8AC4003E3518 /* UIImage+OpenCV.mm in Sources */,
+				130989FF190F8A6B003E3518 /* CameraManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +398,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YourMark/YourMark-Prefix.pch";
 				INFOPLIST_FILE = "YourMark/YourMark-Info.plist";
@@ -395,6 +415,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YourMark/YourMark-Prefix.pch";
 				INFOPLIST_FILE = "YourMark/YourMark-Info.plist";
